@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fregment.ShopCartFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="购物车"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        />
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xRecycler_View"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        >
+
+        <CheckBox
+            android:id="@+id/Allcheck_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+         <TextView
+             android:textStyle="bold"
+             android:textColor="@color/colorPrimary"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="20sp"
+             android:paddingLeft="10dp"
+             android:text="全选"
+             />
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="20dp"
+                    android:text="总价:￥:"
+                    android:textColor="#e53e42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/sumprice"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:text="0"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/buy"
+            android:text="去结算"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:background="#ff00"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

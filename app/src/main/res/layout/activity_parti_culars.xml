@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".mvp.view.activity.ProductsActivity">
+    tools:context=".mvp.view.activity.PartiCularsActivity">
 
 
     <LinearLayout
@@ -15,14 +15,14 @@
         android:layout_weight="9">
 
         <com.youth.banner.Banner
-            android:id="@+id/detail_banners"
+            android:id="@+id/detail_banner"
             android:layout_width="match_parent"
             android:layout_height="380dp">
 
         </com.youth.banner.Banner>
         <TextView
             android:textStyle="bold"
-            android:id="@+id/detail_prices"
+            android:id="@+id/detail_price"
             android:text="价格"
             android:textColor="#f00"
             android:layout_width="wrap_content"
@@ -30,11 +30,32 @@
         <TextView
             android:textColor="#000"
             android:layout_marginTop="10dp"
-            android:id="@+id/detail_titles"
+            android:id="@+id/detail_title"
             android:text="名字"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </LinearLayout>>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/AddCart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#f00"
+            android:gravity="center"
+            android:text="加入购物车"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <!--<WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>-->
 
 
 </LinearLayout>

@@ -1,15 +1,18 @@
 package com.bwie.jingdong.apdater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.bwie.jingdong.R;
+import com.bwie.jingdong.fregment.ClassifyFregment;
 import com.bwie.jingdong.mvp.model.bean.HomeBean;
 
 import java.util.List;
@@ -31,10 +34,11 @@ public class FenLetapdater extends RecyclerView.Adapter<FenleiHoder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FenleiHoder holder, int position) {
+    public void onBindViewHolder(@NonNull final FenleiHoder holder, int position) {
 
         holder.ivGrid.setImageURI(Uri.parse(list.get(position).getIcon()));
         holder.tvGridName.setText(list.get(position).getName());
+
     }
 
     @Override

@@ -4,6 +4,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.Myapp"
@@ -13,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".mvp.view.activity.WelcomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +31,23 @@
         </activity>
         <activity android:name=".mvp.view.activity.ShowActivity" />
         <activity android:name=".mvp.view.activity.ProductsActivity" />
-        <activity android:name=".mvp.view.activity.FloawActivity"></activity>
+        <activity android:name=".mvp.view.activity.FloawActivity" />
+        <activity android:name=".mvp.view.activity.PartiCularsActivity" />
+        <activity android:name=".mvp.view.activity.LoginActivity" />
+        <activity android:name=".mvp.view.activity.UserSetActivity" />
+        <activity android:name=".mvp.view.activity.MainActivity" />
+        <activity android:name=".mvp.view.activity.PresonActivity"></activity>
+
+      <!--  <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.bwie.jingdong"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/filepaths" />
+        </provider>-->
+
     </application>
 
 </manifest>

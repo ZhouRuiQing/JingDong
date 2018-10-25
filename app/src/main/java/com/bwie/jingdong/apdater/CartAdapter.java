@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bwie.jingdong.R;
-import com.bwie.jingdong.inter.CartAllCheckLinstener;
-import com.bwie.jingdong.inter.CheckListener;
+import com.bwie.jingdong.mvp.model.inter.CartAllCheckLinstener;
+import com.bwie.jingdong.mvp.model.inter.CheckListener;
 import com.bwie.jingdong.mvp.model.bean.CartsBean;
 import com.jcodecraeer.xrecyclerview.ItemTouchHelperAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Collections;
 import java.util.List;
@@ -66,6 +68,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHoder> implements 
             }else{
                 holder.shopCartSelect.setChecked(true);
             }
+
+            EventBus.getDefault().post(0);
         }
 
         holder.shopCartSelect.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +90,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHoder> implements 
                 if(cartAllCheckLinstener!=null){
                     cartAllCheckLinstener.notifyAllCheckboxStatus();
                 }
-
+               // EventBus.getDefault().post(0);
             }
         });
 

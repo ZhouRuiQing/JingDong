@@ -64,6 +64,18 @@ dependencies {
     /*自定义流式布局*/
     implementation 'com.fyales.android:library:1.0.2'
 
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'
+
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    implementation 'com.android.support:design:27.0.0'
+
+
+
+
 }
 
 configurations.all {

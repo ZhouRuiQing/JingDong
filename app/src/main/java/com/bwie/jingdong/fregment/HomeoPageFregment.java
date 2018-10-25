@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +21,7 @@ import com.bwie.jingdong.IView.HomeView;
 import com.bwie.jingdong.IView.IMainView;
 import com.bwie.jingdong.R;
 import com.bwie.jingdong.apdater.FenLetapdater;
+import com.bwie.jingdong.apdater.MiaoSaApdater;
 import com.bwie.jingdong.apdater.Myapdater;
 import com.bwie.jingdong.mvp.model.bean.HomeBean;
 import com.bwie.jingdong.mvp.model.bean.UiBean;
@@ -30,8 +29,8 @@ import com.bwie.jingdong.mvp.model.utils.MyLoder;
 import com.bwie.jingdong.mvp.present.HomePresent;
 import com.bwie.jingdong.mvp.present.MainPresent;
 import com.bwie.jingdong.mvp.view.activity.FloawActivity;
-import com.bwie.jingdong.mvp.view.cancvas.NoticeView;
 import com.bwie.jingdong.mvp.view.activity.ShowActivity;
+import com.bwie.jingdong.mvp.view.cancvas.NoticeView;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.youth.banner.Banner;
@@ -58,8 +57,8 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
     Banner banner;
     @BindView(R.id.recycler_View)
     RecyclerView recyclerView;
-    @BindView(R.id.swipe)
-    SwipeRefreshLayout swipe;
+    /*  @BindView(R.id.swipe)
+      SwipeRefreshLayout swipe;*/
     Unbinder unbinder;
     @BindView(R.id.recycler_View_grid)
     RecyclerView recyclerViewGrid;
@@ -67,6 +66,8 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
     NoticeView noticeView;
     @BindView(R.id.but_sousuo)
     Button butSousuo;
+    @BindView(R.id.Recycler_View_MiaoSa)
+    RecyclerView RecyclerViewMiaoSa;
     private MainPresent present;
     private Myapdater apdater;
     private LinearLayoutManager layoutManager;
@@ -76,6 +77,7 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
     private HomePresent homePresent;
 
     private final int REQUEST_CODE = 0x1000;
+    private MiaoSaApdater miaoapdater;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,9 +96,9 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
         homePresent = new HomePresent(this);
         homePresent.getHome();
         initView();
-        initData();
+        //initData();
 
-        present.getdatas("手机", page, "0");
+        //  present.getdatas("手机", page, "0");
 
         ivCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,19 +109,21 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
             }
         });
 
+        //搜索框
         edt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),FloawActivity.class);
+                Intent intent = new Intent(getActivity(), FloawActivity.class);
                 startActivity(intent);
             }
         });
+
         butSousuo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String s = edt.getText().toString();
-                Intent intent = new Intent(getActivity(),ShowActivity.class);
-                intent.putExtra("s",s);
+                Intent intent = new Intent(getActivity(), ShowActivity.class);
+                intent.putExtra("s", s);
                 startActivity(intent);
 
             }
@@ -160,12 +164,10 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
 
 
     private void initView() {
-        layoutManager = new GridLayoutManager(getActivity(),2,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
+
     }
 
-    private void initData() {
-        present = new MainPresent(this);
+    /*private void initData() {
         apdater = new Myapdater(getActivity());
         recyclerView.setAdapter(apdater);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -190,7 +192,7 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
                 refresh();
             }
         });
-    }
+    }*/
 
     private void refresh() {
         page = 1;
@@ -206,16 +208,7 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
 
     @Override
     public void onSuccess(List<UiBean.DataBean> list) {
-        Log.i("aaa", list + "");
-        if (isFresh) {
-            apdater.addData(list, true);
-            isFresh = false;
-            swipe.setRefreshing(false);
-        } else {
-            apdater.addData(list, false);
-        }
 
-        apdater.notifyDataSetChanged();
     }
 
     @Override
@@ -244,11 +237,42 @@ public class HomeoPageFregment extends Fragment implements HomeView, IMainView {
 
     @Override
     public void success(HomeBean homeBean) {
+
+        List<HomeBean.DataBean.TuijianBean.ListBeanX> list = homeBean.getData().getTuijian().getList();
+        initTuiJian(list);
         Log.i("aaa", homeBean + "");
         List<HomeBean.DataBean.BannerBean> dataBanner = homeBean.getData().getBanner();
-        Log.i("aaa", dataBanner.size() + "");
+        Log.i("ccc", dataBanner.toString() + "");
         initBanner(dataBanner);
         initfenlei(homeBean);
+        initMiaoSa(homeBean);
+
+    }
+
+    private void initMiaoSa(HomeBean homeBean) {
+
+        List<HomeBean.DataBean.MiaoshaBean.ListBean> list = homeBean.getData().getMiaosha().getList();
+        RecyclerViewMiaoSa.setLayoutManager(new GridLayoutManager(getActivity(), 1, LinearLayoutManager.HORIZONTAL, false));
+        miaoapdater = new MiaoSaApdater(getActivity(),list);
+        RecyclerViewMiaoSa.setAdapter(miaoapdater);
+    }
+
+    private void initTuiJian(List<HomeBean.DataBean.TuijianBean.ListBeanX> list) {
+        layoutManager = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        apdater = new Myapdater(getActivity(), list);
+        recyclerView.setAdapter(apdater);
+      /*  Log.i("aaa", list + "");
+        if (isFresh) {
+            apdater.addData(list, true);
+            isFresh = false;
+            swipe.setRefreshing(false);
+        } else {
+            apdater.addData(list, false);
+        }
+
+        apdater.notifyDataSetChanged();
+*/
     }
 
     private void initfenlei(HomeBean homeBean) {

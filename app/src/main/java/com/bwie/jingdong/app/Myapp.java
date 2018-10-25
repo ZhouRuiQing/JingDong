@@ -1,6 +1,8 @@
 package com.bwie.jingdong.app;
 
 import android.app.Application;
+import android.os.Build;
+import android.os.StrictMode;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -15,6 +17,11 @@ public class Myapp extends Application {
         Fresco.initialize(this);
         initLoder();
         initzxing();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
     }
 
     private void initzxing() {

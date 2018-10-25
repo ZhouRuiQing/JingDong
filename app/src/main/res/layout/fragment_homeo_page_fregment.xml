@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fregment.HomeoPageFregment">
+
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -55,8 +63,6 @@
 
     </LinearLayout>
 
-
-
     <!--  轮播图-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,7 +76,6 @@
     </LinearLayout>
 
  <!-- 网格-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp">
@@ -130,6 +135,26 @@
             android:textSize="14sp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="京东秒杀"
+            android:textSize="25sp"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/Recycler_View_MiaoSa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
     <!--   为您推荐-->
 
     <!--  列表  表格-->
@@ -149,17 +174,20 @@
             android:layout_marginBottom="10dp"
             />
 
-        <android.support.v4.widget.SwipeRefreshLayout
+     <!--   <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent">-->
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_View"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
     </LinearLayout>
 </LinearLayout>
+    </ScrollView>
+
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

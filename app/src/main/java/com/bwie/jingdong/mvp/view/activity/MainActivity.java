@@ -1,9 +1,10 @@
-package com.bwie.jingdong;
+package com.bwie.jingdong.mvp.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bwie.jingdong.R;
 import com.bwie.jingdong.fregment.ClassifyFregment;
 import com.bwie.jingdong.fregment.HomeoPageFregment;
 import com.bwie.jingdong.fregment.MyFragment;
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
                             mBottomBar.setSpot(1, false);
                     }
                 })
-                .setSpot(1, true)
-                .setSpot(2, true);
+                .setSpot(1, false)
+                .setSpot(2, false);
     }
 
     public void setShowTabBar(boolean isShow){

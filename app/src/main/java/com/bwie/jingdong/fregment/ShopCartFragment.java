@@ -4,7 +4,6 @@ package com.bwie.jingdong.fregment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +12,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bwie.jingdong.IView.HomeView;
 import com.bwie.jingdong.IView.ICartsView;
 import com.bwie.jingdong.R;
 import com.bwie.jingdong.apdater.CartAdapter;
-import com.bwie.jingdong.inter.CartAllCheckLinstener;
+import com.bwie.jingdong.mvp.model.inter.CartAllCheckLinstener;
 import com.bwie.jingdong.mvp.model.bean.CartsBean;
-import com.bwie.jingdong.mvp.model.bean.HomeBean;
-import com.bwie.jingdong.mvp.model.bean.UiBean;
 import com.bwie.jingdong.mvp.present.CartsPresent;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -61,6 +57,8 @@ public class ShopCartFragment extends Fragment implements ICartsView,CartAllChec
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shop_cart, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+       //EventBus.getDefault().register(this);
         present = new CartsPresent(this);
         present.getCarts("71");
         initView();
@@ -121,18 +119,23 @@ public class ShopCartFragment extends Fragment implements ICartsView,CartAllChec
 
     }
 
-    private void totalPrice() {
-        double totalprice = 0;
+    //@Subscribe(threadMode = ThreadMode.MAIN) Integer yu  if (yu == 0) { }
+    public void totalPrice() {
 
-        for (int i = 0; i < cartAdapter.getCartList().size(); i++) {
-            for (int i1 = 0; i1 < cartAdapter.getCartList().get(i).getList().size(); i1++) {
-                if (cartAdapter.getCartList().get(i).getList().get(i1).isSelected()) {
-                    CartsBean.DataBean.ListBean listBean = cartAdapter.getCartList().get(i).getList().get(i1);
-                    totalprice += listBean.getBargainPrice() * listBean.getTotalNum();
+
+            double totalprice = 0;
+
+            for (int i = 0; i < cartAdapter.getCartList().size(); i++) {
+                for (int i1 = 0; i1 < cartAdapter.getCartList().get(i).getList().size(); i1++) {
+                    if (cartAdapter.getCartList().get(i).getList().get(i1).isSelected()) {
+                        CartsBean.DataBean.ListBean listBean = cartAdapter.getCartList().get(i).getList().get(i1);
+                        totalprice += listBean.getBargainPrice() * listBean.getTotalNum();
+                    }
                 }
             }
-        }
-        sumprice.setText("" + totalprice);
+            sumprice.setText("" + totalprice);
+
+
     }
 
     @Override
@@ -140,17 +143,15 @@ public class ShopCartFragment extends Fragment implements ICartsView,CartAllChec
         Log.i("aaaa",cartsBean.getData().size()+"");
 
         if(cartsBean!=null&&cartsBean.getData()!=null){
-
           list = cartsBean.getData();
           xRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
           cartAdapter = new CartAdapter(getActivity(),list);
           xRecyclerView.setAdapter(cartAdapter);
         }else {
-
             Toast.makeText(getActivity(),"没有数据",Toast.LENGTH_LONG).show();
         }
 
-
+        cartAdapter.setCartAllCheckLinstener(this);
 
     }
 
@@ -164,6 +165,8 @@ public class ShopCartFragment extends Fragment implements ICartsView,CartAllChec
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+
+        //EventBus.getDefault().unregister(this);
     }
 
 

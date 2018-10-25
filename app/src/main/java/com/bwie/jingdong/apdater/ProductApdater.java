@@ -1,7 +1,6 @@
 package com.bwie.jingdong.apdater;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +9,12 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bwie.jingdong.R;
-import com.bwie.jingdong.inter.CartAllCheckLinstener;
-import com.bwie.jingdong.inter.CheckListener;
+import com.bwie.jingdong.mvp.model.inter.CartAllCheckLinstener;
+import com.bwie.jingdong.mvp.model.inter.CheckListener;
 import com.bwie.jingdong.mvp.model.bean.CartsBean;
 import com.bwie.jingdong.mvp.view.cancvas.My_add_reduce;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -85,6 +86,8 @@ class ProductApdater extends RecyclerView.Adapter<ProductViewHoder>{
                 if (checkListener!=null){
                     checkListener.notifyParpen();
                 }
+
+               // EventBus.getDefault().post(0);
             }
         });
 

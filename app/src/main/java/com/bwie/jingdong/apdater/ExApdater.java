@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bwie.jingdong.R;
 import com.bwie.jingdong.mvp.model.bean.ProductCatagory;
+import com.bwie.jingdong.mvp.view.activity.PartiCularsActivity;
 import com.bwie.jingdong.mvp.view.activity.ProductsActivity;
 import com.bwie.jingdong.mvp.view.cancvas.MyGridView;
 
@@ -81,14 +82,14 @@ public class ExApdater extends BaseExpandableListAdapter {
         //为gridview设置条目点击监听
         grid.setAdapter(new GridApdater(listBeans));
 
-        /*grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(parent.getContext(), ProductsActivity.class);
                 intent.putExtra("pscid", list.get(position).getPcid());
                 parent.getContext().startActivity(intent);
             }
-        });*/
+        });
 
         return convertView;
     }

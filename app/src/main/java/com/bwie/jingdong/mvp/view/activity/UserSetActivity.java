@@ -46,10 +46,8 @@ public class UserSetActivity extends AppCompatActivity implements IRegView {
     public void RegSuccess(UserReg userReg) {
 
         if(userReg.getCode().equals("1")){
-
             Toast.makeText(this,"注册失败",Toast.LENGTH_SHORT).show();
         }else {
-
             Toast.makeText(this,"注册成功",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this,LoginActivity.class));
             finish();

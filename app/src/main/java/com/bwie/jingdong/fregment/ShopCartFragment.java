@@ -1,6 +1,8 @@
 package com.bwie.jingdong.fregment;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,8 +61,10 @@ public class ShopCartFragment extends Fragment implements ICartsView,CartAllChec
         unbinder = ButterKnife.bind(this, view);
 
        //EventBus.getDefault().register(this);
+        SharedPreferences user = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        String uid = user.getString("uid", "");
         present = new CartsPresent(this);
-        present.getCarts("71");
+        present.getCarts(uid);
         initView();
 
         return view;
@@ -151,6 +155,7 @@ public class ShopCartFragment extends Fragment implements ICartsView,CartAllChec
             Toast.makeText(getActivity(),"没有数据",Toast.LENGTH_LONG).show();
         }
 
+        cartAdapter.notifyDataSetChanged();
         cartAdapter.setCartAllCheckLinstener(this);
 
     }

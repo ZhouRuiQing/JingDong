@@ -40,8 +40,6 @@ public class FloawActivity extends AppCompatActivity {
                 String s = edt.getText().toString();
                 mList.add(s);
                 mAdapter.notifyDataSetChanged();
-
-
             }
         });
         mContainer.setAdapter(mAdapter);
